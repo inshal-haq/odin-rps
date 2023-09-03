@@ -1,35 +1,47 @@
-function playGame(playerSelection, computerSelection) {
+game();
+
+function game() {
+  for (let i = 1; i <= 5; i++) {
+    let playerChoice = prompt('Please input your Move (rock, paper, scissors):');
+    if (!playerChoice) break;
+    
+    playerChoice = playerChoice.toLowerCase();
+    console.log(playRound(playerChoice, getComputerChoice()));
+  }
+}
+
+function playRound(playerMove, computerMove) {
   let playerWon = false;
-  
-  if (playerSelection === computerSelection) {
+
+  if (playerMove === computerMove) {
     return 'Tie Game!';
   }
 
-  if (playerSelection === 'rock') {
-    if (computerSelection === 'scissors') {
+  if (playerMove === 'rock') {
+    if (computerMove === 'scissors') {
       playerWon = true;
-    } else if (computerSelection === 'paper') {
+    } else if (computerMove === 'paper') {
       playerWon = false;
     }
-  } else if (playerSelection === 'scissors') {
-    if (computerSelection === 'paper') {
+
+  } else if (playerMove === 'scissors') {
+    if (computerMove === 'paper') {
       playerWon = true;
-    } else if (computerSelection === 'rock') {
+    } else if (computerMove === 'rock') {
       playerWon = false;
     }
-  } else if (playerSelection === 'paper') {
-    if (computerSelection === 'rock') {
+
+  } else if (playerMove === 'paper') {
+    if (computerMove === 'rock') {
       playerWon = true;
-    } else if (computerSelection === 'scissors') {
+    } else if (computerMove === 'scissors') {
       playerWon = false;
     }
   }
   
-  if (playerWon) {
-    return `You Win! ${capitalize(playerSelection)} beats ${capitalize(computerSelection)}`;
-  } else {
-    return `You Lose! ${capitalize(computerSelection)} beats ${capitalize(playerSelection)}`;
-  }
+  return (playerMove) ?
+    `You Win! ${capitalize(playerMove)} beats ${capitalize(computerMove)}` :
+    `You Lose! ${capitalize(computerMove)} beats ${capitalize(playerMove)}`;
 }
 
 function getComputerChoice() {
